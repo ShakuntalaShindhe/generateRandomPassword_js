@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: #002339;
+        color: #fff;
+    }
+    .container{
+        /* border: 1px solid red; */
+        margin: 12%;
+        width: 90%;
+        max-width: 700px;
+    }
+    .display{
+        /* border: 1px solid red; */
+        width: 100%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        background-color: #fff;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        border-radius: 8px;
+    }
+    .container h1{
+        font-size:45px ;
+        font-weight: 500;   
+    }
+    .container h1 span{
+        color: #019f55;
+        border-bottom: 3px solid #019f55 ;
+        padding-bottom: 7px;
+    }
+    .display img{
+        width: 30px;
+        cursor: pointer;
+    }
+    .display input{
+        padding: 10px;
+        border: none;
+        outline: none;
+        font-size: 25px;
+    }
+    .container button img{
+       width: 20px;
+       margin-right: 10px;
+    }
+    .container button{
+        padding: 6px 10px;
+        border: none;
+        outline: none;
+        background-color:#019f55 ;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 5px;
+        font-weight: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Generate a <br><span>Random Password</span></h1>
+        <div class="display">
+           <input type="text" id="password" placeholder="Password">
+           <img src="copy.png" onclick="copyPass()"> 
+        </div>
+        <button onclick="createPass()"><img src="generate.png"> Generate Password</button>
+    </div>
+</body>
+<script>
+   const passwordGenerate=document.getElementById('password')
+   const passLen=12;
+   const upperCase='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   const lowerCase='abcdefghijklmnopqrstuvwxyz'
+   const specialChar='%$&*@?[]\=()';
+   const numbers='0123456789';
+
+   const allChar=upperCase+lowerCase+numbers+specialChar
+
+   function createPass(){
+    let password='';
+    password += upperCase[Math.floor(Math.random()*upperCase.length)];   
+    password += lowerCase[Math.floor(Math.random()*lowerCase.length)];   
+    password += numbers[Math.floor(Math.random()*numbers.length)];   
+    password += specialChar[Math.floor(Math.random()*specialChar.length)];
+  
+   while(passLen > password.length){
+         password += allChar[Math.floor(Math.random()*allChar.length)];
+   }
+   passwordGenerate.value = password;
+}   
+
+function copyPass(){
+    passwordGenerate.select();
+    document.execCommand('copy')
+}
+</script>
+</html>
